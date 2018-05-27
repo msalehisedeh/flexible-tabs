@@ -305,3 +305,18 @@
         }
     }
 }
+
+@media screen and (max-width: 600px) {
+    .flexible-tabs {
+        display: table;
+    }
+    .tabs-control {
+        a {
+            width: 100%;
+            display: table;
+        }
+    }
+    .tabs-viewport {
+        margin: 5px 0;
+    }
+}

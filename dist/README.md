@@ -3,7 +3,9 @@
 
 Have you ever wanted to have a simple way of creating robust tabs in your components? Have you thought of what it takes to get there? With flexible tabs, you can configure position of rabs and how they should be displayed.  You can feed icons to the tabs and have a view area for displaying images.. You can have the view area to be rendered only if selected and watch for tab selection events to perform additional tasks.
 
-[Source code](https://github.com/msalehisedeh/flexible-tabs) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
+Please send your requests or comments through the link provided below:
+
+[Live Demo](https://flexible-tabs.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-tabs) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
 
 
 
@@ -20,6 +22,7 @@ EXPORTS:
 ```
 
 ## Features
+* Responsive
 * ADA Compliant
 * Configurable tab position
 * Configurable tab display type
