@@ -1,0 +1,34 @@
+
+<div class="flexible-tabs {{type}} {{position}}">
+    <div class="tabs-control" role="list" *ngIf="position === 'top' || position === 'left'">
+        <a *ngFor="let tab of tabs; let i = index" 
+            role="listitem" 
+            tabindex="0"
+            (keyup)="keyup($event)" 
+            (click)="selectTab(i)" 
+            [class.selected]="tab.selected">
+            <span *ngIf="tab.tabicon && !tab.selected" [class]="tab.tabicon" aria-hidden="true"></span>
+            <span *ngIf="tab.tabalticon && tab.selected" [class]="tab.tabalticon" aria-hidden="true"></span>
+            <span *ngIf="!tab.tabicon && !tab.tabalticon && isIconified && position === 'left'" class="place-icon" aria-hidden="true"></span>
+            <span class="off-screen" [textContent]="tab.message"></span>
+            <span [textContent]="tab.title"></span>
+        </a>
+    </div>
+    <div class="tabs-viewport">
+        <ng-content></ng-content>
+    </div>
+    <div class="tabs-control" role="list" *ngIf="position === 'bottom' || position === 'right'">
+        <a *ngFor="let tab of tabs; let i = index" 
+            role="listitem" 
+            tabindex="0"
+            (keyup)="keyup($event)" 
+            (click)="selectTab(i)" 
+            [class.selected]="tab.selected">
+            <span *ngIf="tab.tabicon && !tab.selected" [class]="tab.tabicon" aria-hidden="true"></span>
+            <span *ngIf="tab.tabalticon && tab.selected" [class]="tab.tabalticon" aria-hidden="true"></span>
+            <span *ngIf="!tab.tabicon && !tab.tabalticon && isIconified && position === 'right'" class="place-icon" aria-hidden="true"></span>
+            <span class="off-screen" [textContent]="tab.message"></span>
+            <span [textContent]="tab.title"></span>
+        </a>
+    </div>
+</div>

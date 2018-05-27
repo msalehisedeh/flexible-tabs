@@ -1,0 +1,7 @@
+    
+<ng-container  
+    *ngIf="selected && template"
+    [ngTemplateOutlet]="template" 
+    [ngTemplateOutletContext]="templateContext()"></ng-container>
+
+<ng-content *ngIf="selected && !template"></ng-content>
