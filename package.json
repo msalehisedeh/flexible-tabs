@@ -1,6 +1,6 @@
 {
   "name": "flexible-tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -20,6 +20,7 @@
     "icon toggle",
     "icon button",
     "flexible",
+    "ADA compliant",
     "easy to use",
     "best"
   ],

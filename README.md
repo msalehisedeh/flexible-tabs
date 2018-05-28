@@ -1,7 +1,7 @@
 
 # Welcome to Flexible tabs!
 
-Have you ever wanted to have a simple way of creating robust tabs in your components? Have you thought of what it takes to get there? With flexible tabs, you can configure position of rabs and how they should be displayed.  You can feed icons to the tabs and have a view area for displaying images.. You can have the view area to be rendered only if selected and watch for tab selection events to perform additional tasks.
+Have you ever wanted to have a simple way of creating robust tabs in your components? Have you thought of what it takes to get there? With flexible tabs, you can configure position of tabs and how they should be displayed.  You can feed icons to the tabs and have a view area for displaying images.. You can have the view area to be rendered only if selected and watch for tab selection events to perform additional tasks.
 
 Please send your requests or comments through the link provided below:
 
@@ -27,11 +27,16 @@ EXPORTS:
 * Configurable tab position
 * Configurable tab display type
 
+### How it can be done?
 
-You need to set the tabs tag in your HTML content:
+You will need to set the tabs in your HTML content:
 ```javascript
-1) myPosition can optionally be equal to top,left,right, bottom
-2) myType can optionally be equal to tab, button, plain, image
+In this example:
+1) myPosition can optionally be equal to one of (top, left, right, bottom) options.
+2) myType can optionally be equal to one of (tab, button, plain, image) options.
+3) message is needed to set text in order to make ADA compliant message on each tab.
+4) first tab is static and Angular will render it immediately.
+5) second tab is template and angular will render it only if respective tab for it is selected.
 
 <flexible-tabs 
   [position]="myPosition" 

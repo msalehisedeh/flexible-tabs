@@ -19,3 +19,6 @@ fieldset {
     margin-bottom: 15px;
     border-radius: 5px;
 }
+::ng-deep .tab-title {
+    text-transform: capitalize;
+}

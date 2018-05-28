@@ -18,6 +18,7 @@ export declare class FlexibleTabsComponent implements AfterContentInit {
     children: QueryList<FlexibleTabComponent>;
     position: string;
     type: string;
+    message: string;
     private onchange;
     constructor();
     ngAfterContentInit(): void;

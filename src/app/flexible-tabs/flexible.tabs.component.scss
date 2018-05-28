@@ -20,10 +20,18 @@
     }
     .tabs-control {
         z-index: 2;
+        flex-wrap: wrap-reverse;
+        display: flex;
         a {
             box-sizing: border-box;
+            white-space: nowrap;
             padding: 2px 15px;
+            background-color: #fdfeff;
+            color: #999;
+
             &.selected {
+                background-color: #fff;
+                color: #000;
                 font-weight: bold;
             }
         }
@@ -75,7 +83,6 @@
     
                 a {
                     border: 1px solid #ddd;
-                    background-color: white;
                     border-radius: 4px 4px 0 0;
                     &.selected {
                         border-bottom-color: white;
@@ -134,7 +141,6 @@
     
                 a {
                     border: 1px solid #ddd;
-                    background-color: white;
                     border-radius: 0 0 4px 4px;
                     &.selected {
                         border-top-color: white;
@@ -209,7 +215,6 @@
     
                 a {
                     border: 1px solid #ddd;
-                    background-color: white;
                     float: left;
                     border-radius: 4px 0 0 4px;
                     width: 100%;
@@ -287,7 +292,6 @@
     
                 a {
                     border: 1px solid #ddd;
-                    background-color: white;
                     display: table;
                     float: left;
                     border-radius: 0 4px 4px 0;
@@ -311,6 +315,7 @@
         display: table;
     }
     .tabs-control {
+        display: block;
         a {
             width: 100%;
             display: table;

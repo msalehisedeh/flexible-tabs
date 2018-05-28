@@ -66,6 +66,9 @@ export class FlexibleTabsComponent implements AfterContentInit  {
     @Input("type")
     public type: string; // button, tab, plain, image
 
+    @Input("message")
+    public message = "click to select tab ";
+
 	@Output('onchange')
 	private onchange = new EventEmitter();
 

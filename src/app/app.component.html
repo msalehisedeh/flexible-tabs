@@ -20,8 +20,8 @@
 </fieldset>
 
 <flexible-tabs [position]="myPosition" [type]="myType" message="click to select tab " (onchange)="ontabselection($event)">
-  <flexible-tab title="tab 1" tabicon="fa fa-bug" tabalticon="fa fa-coffee">
-    <h3> information</h3>
+  <flexible-tab *ngFor="let dummy of ' '.repeat(20).split(''), let x = index" title="tab {{x}}" tabicon="fa fa-bug" tabalticon="fa fa-coffee">
+    <h3> information {{x}}</h3>
     This is a simple tab content that will be rendered immediately even if tab is not selected.  
   </flexible-tab>
   <flexible-tab title="tab 2" [template]="tab2" [data]="data" selected="true"></flexible-tab>
