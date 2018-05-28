@@ -32,6 +32,9 @@
   This is a simple tab content that will be rendered only if tab is selected.
 </ng-template>
 
-<ul class="logger">
+<fieldset class="log-field">
+  <legend>Event Logs</legend>
+  <ul class="logger">
   <li *ngFor="let x of events" [textContent]="x | json"></li>
 </ul>
+</fieldset>

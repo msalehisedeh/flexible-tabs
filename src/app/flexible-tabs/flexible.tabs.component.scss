@@ -17,6 +17,7 @@
     }
     .tabs-viewport {
         box-sizing: border-box;
+        min-height: 150px;
     }
     .tabs-control {
         z-index: 2;
@@ -28,6 +29,11 @@
             padding: 2px 15px;
             background-color: #fdfeff;
             color: #999;
+
+            &:hover {
+                background-color: #fff;
+                color: #ff3e58                
+            }
 
             &.selected {
                 background-color: #fff;
@@ -55,7 +61,7 @@
                     border: 1px solid #888;
                     margin: 0 2px;
                     border-radius: 4px;
-                    background-color: #ccc;
+                    background-color: #f0f0f0cc;
     
                     &.selected {
                         background-color: #2e32ff;
@@ -99,6 +105,7 @@
         flex-direction: column;
         &.plain {
             .tabs-control {
+                flex-wrap: wrap;
                 a {
                     margin: 0 2px;
                 }
@@ -109,11 +116,12 @@
         }
         &.button {
             .tabs-control {
+                flex-wrap: wrap;
                 a {
                     border: 1px solid #888;
                     margin: 0 2px;
                     border-radius: 4px;
-                    background-color: #ccc;
+                    background-color: #f0f0f0cc;
     
                     &.selected {
                         background-color: #2e32ff;
@@ -126,17 +134,19 @@
             }
         }
         &.image {
-            .tabs-viewport {
-                border: 1px solid #ddd;
-            }
             .tabs-control {
+                flex-wrap: wrap;
                 a {
                     margin: 0 2px; 
                 }
             }
+            .tabs-viewport {
+                border: 1px solid #ddd;
+            }
         }
         &.tab {
            .tabs-control {
+                flex-wrap: wrap;
                 margin-top: -1px;
     
                 a {
@@ -178,7 +188,7 @@
                     border: 1px solid #888;
                     margin: 0 2px;
                     border-radius: 4px;
-                    background-color: #ccc;
+                    background-color: #f0f0f0cc;
                     width: 100%;
                     display: table;
     
@@ -255,7 +265,7 @@
                     border: 1px solid #888;
                     margin: 0 2px;
                     border-radius: 4px;
-                    background-color: #ccc;
+                    background-color: #f0f0f0cc;
                     width: 100%;
                     display: table;
     
