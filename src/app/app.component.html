@@ -16,7 +16,8 @@
   <label for="tab-selection"><input id="tab-selection" name="myType" type="radio" [checked]="myType === 'tab'" (click)="myType = 'tab'" />Tab</label>
   <label for="button-selection"><input id="button-selection" name="myType" type="radio" [checked]="myType === 'button'" (click)="myType = 'button'" />Button</label>
   <label for="plain-selection"><input id="plain-selection" name="myType" type="radio" [checked]="myType === 'plain'" (click)="myType = 'plain'" />Plain</label>
-  <label for="image-selection"><input id="image-selection" name="myType" type="radio" [checked]="myType === 'image'" (click)="myType = 'image'" />Image</label>
+  <label for="icon-selection"><input id="icon-selection" name="myType" type="radio" [checked]="myType === 'icon'" (click)="myType = 'icon'" />Icon Only</label>
+  <label for="radio-selection"><input id="radio-selection" name="myType" type="radio" [checked]="myType === 'radio'" (click)="myType = 'radio'" />Radio</label>
 </fieldset>
 
 <flexible-tabs [position]="myPosition" [type]="myType" message="click to select tab " (onchange)="ontabselection($event)">

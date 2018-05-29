@@ -64,7 +64,7 @@ export class FlexibleTabsComponent implements AfterContentInit  {
     public position: string; // top, left, bottom, right
 
     @Input("type")
-    public type: string; // button, tab, plain, image
+    public type: string; // button, tab, plain, icon, radio
 
     @Input("message")
     public message = "click to select tab ";

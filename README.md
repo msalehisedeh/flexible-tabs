@@ -33,7 +33,7 @@ You will need to set the tabs in your HTML content:
 ```javascript
 In this example:
 1) myPosition can optionally be equal to one of (top, left, right, bottom) options.
-2) myType can optionally be equal to one of (tab, button, plain, image) options.
+2) myType can optionally be equal to one of (tab, button, plain, icon, radio) options.
 3) message is needed to set text in order to make ADA compliant message on each tab.
 4) first tab is static and Angular will render it immediately.
 5) second tab is template and angular will render it only if respective tab for it is selected.
@@ -63,6 +63,15 @@ You will also need to implement a few functions
   ontabselection(event) {
     // decide on what to do with the evet
   }
+```
+
+If you want to overide any parts of default look, you can use ::ng-deep and do the following:
+```javascript
+CSS Example:
+
+::ng-deep .tab-title {
+    text-transform: capitalize;
+}
 ```
 
 ![alt text](https://raw.githubusercontent.com/msalehisedeh/flexible-tabs/master/sample.png  "What you would see when a flexible tabs is used")
