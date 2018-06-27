@@ -8,6 +8,8 @@ Please send your requests or comments through the link provided below:
 [Live Demo](https://flexible-tabs.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-tabs) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
 
 
+# Version 1.0.0
+Compiled with AOT option and resolved issues. 
 
 # Version 0.0.1
 
