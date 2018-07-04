@@ -35,6 +35,9 @@ var FlexibleTabsComponent = /** @class */ (function () {
     }
     FlexibleTabsComponent.prototype.ngAfterContentInit = function () {
         var _this = this;
+        this.tabs = [];
+        this.selectedIndex = -1;
+        this.isIconified = false;
         this.children.forEach(function (tabInstance, index) {
             if (tabInstance.selected) {
                 _this.selectedIndex = index;

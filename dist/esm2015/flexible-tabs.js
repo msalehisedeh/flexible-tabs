@@ -49,6 +49,9 @@ class FlexibleTabsComponent {
      * @return {?}
      */
     ngAfterContentInit() {
+        this.tabs = [];
+        this.selectedIndex = -1;
+        this.isIconified = false;
         this.children.forEach((tabInstance, index) => {
             if (tabInstance.selected) {
                 this.selectedIndex = index;

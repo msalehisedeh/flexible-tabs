@@ -1,6 +1,6 @@
 {
   "name": "flexible-tabs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -13,11 +13,13 @@
   "keywords": [
     "angular 4",
     "tabs",
+    "dynamic tabs",
+    "dynamic content",
 	"responsive",
     "grid",
     "configurable",
-    "icon",
-    "icon toggle",
+    "icon tabs",
+    "toggle icon",
     "icon button",
     "flexible",
     "ADA compliant",

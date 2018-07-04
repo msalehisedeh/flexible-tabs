@@ -11,7 +11,6 @@ import {
 	ContentChildren,
 	QueryList,
 	AfterContentInit,
-	ViewContainerRef,
 	EventEmitter
 } from '@angular/core';
 
@@ -58,7 +57,8 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 	selectedIndex = -1;
 	isIconified = false;
 
-	@ContentChildren(FlexibleTabComponent) children: QueryList<FlexibleTabComponent>;
+	@ContentChildren(FlexibleTabComponent)
+	children: QueryList<FlexibleTabComponent>;
 
     @Input("position")
     public position: string; // top, left, bottom, right
@@ -75,6 +75,10 @@ export class FlexibleTabsComponent implements AfterContentInit  {
     constructor() {}
 
 	ngAfterContentInit() {
+		this.tabs = [];
+		this.selectedIndex = -1;
+		this.isIconified = false;
+
 		this.children.forEach((tabInstance, index) => {
 			if(tabInstance.selected) {
 				this.selectedIndex = index;
