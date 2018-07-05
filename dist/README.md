@@ -8,6 +8,9 @@ Please send your requests or comments through the link provided below:
 [Live Demo](https://flexible-tabs.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-tabs) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
 
 
+# Version 1.0.2
+set defaults for some attributes. 
+
 # Version 1.0.0
 Compiled with AOT option and resolved issues. 
 
@@ -29,16 +32,23 @@ EXPORTS:
 * Configurable tab position
 * Configurable tab display type
 
+## Attributes
+
+| Attribute | Options                         | Default | Description                                         |
+|-----------|---------------------------------|---------|-----------------------------------------------------|
+| position  | top, left, right, bottom        | top     | Tabs displaying position with respect to view port. |
+| type      | tab, button, plain, icon, radio | tab     | Presentation of each tab.                           |
+| selected  | true/false                      | false   | By default the first tab will be selected.          |
+| message   | any string                      | "click to select tab " | ADA compliant message on each tab to be used by screen reader.  |
+
+
 ### How it can be done?
 
 You will need to set the tabs in your HTML content:
 ```javascript
 In this example:
-1) myPosition can optionally be equal to one of (top, left, right, bottom) options.
-2) myType can optionally be equal to one of (tab, button, plain, icon, radio) options.
-3) message is needed to set text in order to make ADA compliant message on each tab.
-4) first tab is static and Angular will render it immediately.
-5) second tab is template and angular will render it only if respective tab for it is selected.
+1) first tab is static and Angular will render it immediately.
+2) second tab is template and angular will render it only if respective tab for it is selected.
 
 <flexible-tabs 
   [position]="myPosition" 

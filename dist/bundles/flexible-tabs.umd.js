@@ -4,6 +4,19 @@
 	(factory((global['flexible-tabs'] = {}),global.ng.core,global.ng.common));
 }(this, (function (exports,core,common) { 'use strict';
 
+var TabTypes = {
+    button: "button",
+    tab: "tab",
+    plain: "plain",
+    icon: "icon",
+    radio: "radio",
+};
+var TabPositions = {
+    top: "top",
+    left: "left",
+    right: "right",
+    bottom: "bottom",
+};
 var FlexibleTabComponent = /** @class */ (function () {
     function FlexibleTabComponent() {
     }
@@ -33,6 +46,8 @@ var FlexibleTabsComponent = /** @class */ (function () {
         this.tabs = [];
         this.selectedIndex = -1;
         this.isIconified = false;
+        this.position = TabPositions.top;
+        this.type = TabTypes.tab;
         this.message = "click to select tab ";
         this.onchange = new core.EventEmitter();
     }
@@ -51,6 +66,9 @@ var FlexibleTabsComponent = /** @class */ (function () {
             }
             _this.tabs.push(tabInstance);
         });
+        if (this.selectedIndex < 0) {
+            this.selectedIndex = 0;
+        }
     };
     FlexibleTabsComponent.prototype.keyup = function (event) {
         var code = event.which;

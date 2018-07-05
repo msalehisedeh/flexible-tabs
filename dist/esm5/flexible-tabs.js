@@ -1,6 +1,19 @@
 import { Component, Input, Output, ContentChildren, EventEmitter, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+var TabTypes = {
+    button: "button",
+    tab: "tab",
+    plain: "plain",
+    icon: "icon",
+    radio: "radio",
+};
+var TabPositions = {
+    top: "top",
+    left: "left",
+    right: "right",
+    bottom: "bottom",
+};
 var FlexibleTabComponent = /** @class */ (function () {
     function FlexibleTabComponent() {
     }
@@ -30,6 +43,8 @@ var FlexibleTabsComponent = /** @class */ (function () {
         this.tabs = [];
         this.selectedIndex = -1;
         this.isIconified = false;
+        this.position = TabPositions.top;
+        this.type = TabTypes.tab;
         this.message = "click to select tab ";
         this.onchange = new EventEmitter();
     }
@@ -48,6 +63,9 @@ var FlexibleTabsComponent = /** @class */ (function () {
             }
             _this.tabs.push(tabInstance);
         });
+        if (this.selectedIndex < 0) {
+            this.selectedIndex = 0;
+        }
     };
     FlexibleTabsComponent.prototype.keyup = function (event) {
         var code = event.which;

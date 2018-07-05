@@ -14,6 +14,21 @@ import {
 	EventEmitter
 } from '@angular/core';
 
+export enum TabTypes {
+	button = "button", 
+	tab = "tab", 
+	plain = "plain", 
+	icon = "icon", 
+	radio = "radio"
+}
+
+export enum TabPositions {
+	top = "top", 
+	left = "left", 
+	right = "right", 
+	bottom = "bottom"
+}
+
 @Component({
 	selector: 'flexible-tab',
 	templateUrl: './flexible.tab.component.html',
@@ -61,10 +76,10 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 	children: QueryList<FlexibleTabComponent>;
 
     @Input("position")
-    public position: string; // top, left, bottom, right
+    public position = TabPositions.top;
 
     @Input("type")
-    public type: string; // button, tab, plain, icon, radio
+    public type = TabTypes.tab;
 
     @Input("message")
     public message = "click to select tab ";
@@ -89,6 +104,9 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 			}
 			this.tabs.push(tabInstance);
 		});
+		if (this.selectedIndex < 0) {
+			this.selectedIndex = 0;
+		}
 	}
 
 	keyup(event) {

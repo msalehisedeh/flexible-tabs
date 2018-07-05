@@ -5,6 +5,21 @@ import { CommonModule } from '@angular/common';
  * @fileoverview added by tsickle
  * @suppress {checkTypes} checked by tsc
  */
+/** @enum {string} */
+const TabTypes = {
+    button: "button",
+    tab: "tab",
+    plain: "plain",
+    icon: "icon",
+    radio: "radio",
+};
+/** @enum {string} */
+const TabPositions = {
+    top: "top",
+    left: "left",
+    right: "right",
+    bottom: "bottom",
+};
 class FlexibleTabComponent {
     constructor() { }
     /**
@@ -42,6 +57,8 @@ class FlexibleTabsComponent {
         this.tabs = [];
         this.selectedIndex = -1;
         this.isIconified = false;
+        this.position = TabPositions.top;
+        this.type = TabTypes.tab;
         this.message = "click to select tab ";
         this.onchange = new EventEmitter();
     }
@@ -62,6 +79,9 @@ class FlexibleTabsComponent {
             }
             this.tabs.push(tabInstance);
         });
+        if (this.selectedIndex < 0) {
+            this.selectedIndex = 0;
+        }
     }
     /**
      * @param {?} event

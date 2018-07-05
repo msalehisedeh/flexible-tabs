@@ -1,4 +1,17 @@
 import { QueryList, AfterContentInit } from '@angular/core';
+export declare enum TabTypes {
+    button = "button",
+    tab = "tab",
+    plain = "plain",
+    icon = "icon",
+    radio = "radio",
+}
+export declare enum TabPositions {
+    top = "top",
+    left = "left",
+    right = "right",
+    bottom = "bottom",
+}
 export declare class FlexibleTabComponent {
     selected: boolean;
     title: string;
@@ -16,8 +29,8 @@ export declare class FlexibleTabsComponent implements AfterContentInit {
     selectedIndex: number;
     isIconified: boolean;
     children: QueryList<FlexibleTabComponent>;
-    position: string;
-    type: string;
+    position: TabPositions;
+    type: TabTypes;
     message: string;
     private onchange;
     constructor();
