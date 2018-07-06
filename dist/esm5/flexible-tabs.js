@@ -63,8 +63,8 @@ var FlexibleTabsComponent = /** @class */ (function () {
             }
             _this.tabs.push(tabInstance);
         });
-        if (this.selectedIndex < 0) {
-            this.selectedIndex = 0;
+        if (this.selectedIndex < 0 && this.tabs.length) {
+            this.selectTab(0);
         }
     };
     FlexibleTabsComponent.prototype.keyup = function (event) {
