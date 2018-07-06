@@ -1,7 +1,7 @@
     
 <ng-container  
-    *ngIf="selected && template"
+    *ngIf="((!hovered && selected) || hovered) && template"
     [ngTemplateOutlet]="template" 
     [ngTemplateOutletContext]="templateContext()"></ng-container>
 
-<ng-content *ngIf="selected && !template"></ng-content>
+<ng-content *ngIf="((!hovered && selected) || hovered) && !template"></ng-content>

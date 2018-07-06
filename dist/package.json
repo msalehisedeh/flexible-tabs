@@ -1,6 +1,6 @@
 {
   "name": "flexible-tabs",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -19,6 +19,8 @@
     "grid",
     "configurable",
     "icon tabs",
+    "menu",
+    "pop menu",
     "toggle icon",
     "icon button",
     "flexible",

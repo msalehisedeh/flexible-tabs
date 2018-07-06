@@ -32,14 +32,25 @@ EXPORTS:
 * Configurable tab position
 * Configurable tab display type
 
-## Attributes
+## flexible-tabs Attributes
 
 | Attribute | Options                         | Default | Description                                         |
 |-----------|---------------------------------|---------|-----------------------------------------------------|
 | position  | top, left, right, bottom        | top     | Tabs displaying position with respect to view port. |
 | type      | tab, button, plain, icon, radio | tab     | Presentation of each tab.                           |
-| selected  | true/false                      | false   | By default the first tab will be selected.          |
+| pophover  | true/false                      | false   | If act like a menu and if tab content should be hidden and should pop on hover.          |
 | message   | any string                      | "click to select tab " | ADA compliant message on each tab to be used by screen reader.  |
+
+## flexible-tab Attributes
+
+| Attribute  | Options                         | Default | Description                                         |
+|------------|---------------------------------|---------|-----------------------------------------------------|
+| selected   | true/false                      | false   | By default the first tab will be selected.          |
+| template   | ng-template                     | none    | Template to be used at runtime to display content for selected tab. |
+| data       | JSON                            | none    | Data to be sent to the template for selected tab.   |
+| title      | any string                      | ""      | tab to be used by screen readername to be displayed.|
+| tabicon    | any string                      | null    | icon to be displayed on tab.                        |
+| tabalticon | any string                      | null    | icon to be displayed on selected tab or on tab hover.|
 
 
 ### How it can be done?

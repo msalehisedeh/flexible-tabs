@@ -36,8 +36,10 @@ export enum TabPositions {
 })
 export class FlexibleTabComponent {
 
+	hovered = false;
+
     @Input("selected")
-    public selected: boolean;
+    public selected = false;
 
     @Input("title")
     public title: string;
@@ -71,6 +73,7 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 	tabs = [];
 	selectedIndex = -1;
 	isIconified = false;
+	popped = false;
 
 	@ContentChildren(FlexibleTabComponent)
 	children: QueryList<FlexibleTabComponent>;
@@ -80,6 +83,9 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 
     @Input("type")
     public type = TabTypes.tab;
+
+    @Input("pophover")
+    public pophover = false;
 
     @Input("message")
     public message = "click to select tab ";
@@ -91,7 +97,7 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 
 	ngAfterContentInit() {
 		this.tabs = [];
-		this.selectedIndex = -1;
+		this.selectedIndex = this.pophover ? -1 : 0;
 		this.isIconified = false;
 
 		this.children.forEach((tabInstance, index) => {
@@ -104,8 +110,8 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 			}
 			this.tabs.push(tabInstance);
 		});
-		if (this.selectedIndex < 0 && this.tabs.length) {
-			this.selectTab( 0 );
+		if (this.tabs.length) {
+			this.selectTab( this.selectedIndex );
 		}
 	}
 
@@ -119,12 +125,27 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 	selectTab(index) {
 		this.tabs.map((tab)=>{
 			tab.selected = false;
+			tab.hovered = false;
 		});
-		this.tabs[index].selected = true;
-		this.selectedIndex = index;
-		this.onchange.emit({
-			selectedIndex: index,
-			selectedTitle: this.tabs[index].title
-		});
+		if (index > -1) {
+			this.tabs[index].selected = true;
+			this.selectedIndex = index;
+			this.popped = true;
+			this.onchange.emit({
+				selectedIndex: index,
+				selectedTitle: this.tabs[index].title
+			});
+		}
+	}
+	hoverTab(index, flag) {
+		if (this.pophover) {
+			this.tabs.map((tab)=>{
+				tab.hovered = false;
+			});
+			if (index > -1){
+				this.tabs[index].hovered = flag;
+			}
+			this.popped = this.selectedIndex > -1 || flag;
+		}
 	}
 }

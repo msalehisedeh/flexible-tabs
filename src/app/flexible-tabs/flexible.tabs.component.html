@@ -6,6 +6,7 @@
             tabindex="0"
             (keyup)="keyup($event)" 
             (click)="selectTab(i)"
+            (mouseenter)="hoverTab(i, true)"
             [title]="type === 'radio' || (type === 'icon' && (tab.tabicon || tab.tabalticon)) ? tab.title : ''" 
             [class.selected]="tab.selected">
             <span *ngIf="tab.tabicon && !tab.selected" [class]="tab.tabicon" aria-hidden="true"></span>
@@ -16,7 +17,7 @@
             <span class="tab-title" [class.off-screen]="type === 'radio' || (type === 'icon' && (tab.tabicon || tab.tabalticon))" [textContent]="tab.title"></span>
         </a>
     </div>
-    <div class="tabs-viewport">
+    <div class="tabs-viewport" [class.popper]="pophover" [class.pop]="popped" (mouseleave)="hoverTab(-1, false)">
         <ng-content></ng-content>
     </div>
     <div class="tabs-control" role="list" *ngIf="position === 'bottom' || position === 'right'">
@@ -25,6 +26,7 @@
             tabindex="0"
             (keyup)="keyup($event)" 
             (click)="selectTab(i)" 
+            (mouseenter)="hoverTab(i, true)"
             [title]="type === 'radio' || (type === 'icon' && (tab.tabicon || tab.tabalticon)) ? tab.title : ''" 
             [class.selected]="tab.selected">
             <span *ngIf="tab.tabicon && !tab.selected" [class]="tab.tabicon" aria-hidden="true"></span>
