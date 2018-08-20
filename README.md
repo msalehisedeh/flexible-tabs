@@ -3,9 +3,15 @@
 
 Have you ever wanted to have a simple way of creating robust tabs in your components? Have you thought of what it takes to get there? With flexible tabs, you can configure position of tabs and how they should be displayed.  You can feed icons to the tabs and have a view area for displaying images.. You can have the view area to be rendered only if selected and watch for tab selection events to perform additional tasks.
 
+**NOTE:** Starting with version 1.1.0 this library is compatible with Angular 6+.
+
 Please send your requests or comments through the link provided below:
 
-[Live Demo](https://flexible-tabs.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-tabs) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
+[Live Demo](https://flexible-tabs.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-tabs/tree/master/src/app) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
+
+
+# Version 1.1.0
+Updated libraries to become compatible with Angular 6+. 
 
 
 # Version 1.0.2
