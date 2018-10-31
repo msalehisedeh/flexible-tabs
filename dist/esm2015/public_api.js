@@ -1,0 +1,8 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,uselessCode} checked by tsc
+ */
+export { FlexibleTabComponent, FlexibleTabsComponent } from './src/app/flexible-tabs/flexible.tabs.component';
+export { FlexibleTabsModule } from './src/app/flexible-tabs/flexible-tabs-module';
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljX2FwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2ZsZXhpYmxlLXRhYnMvIiwic291cmNlcyI6WyJwdWJsaWNfYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsb0JBQW9CLEVBQUUscUJBQXFCLEVBQUUsTUFBTSxpREFBaUQsQ0FBQztBQUM5RyxPQUFPLEVBQUUsa0JBQWtCLEVBQUUsTUFBTSw4Q0FBOEMsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IEZsZXhpYmxlVGFiQ29tcG9uZW50LCBGbGV4aWJsZVRhYnNDb21wb25lbnQgfSBmcm9tICcuL3NyYy9hcHAvZmxleGlibGUtdGFicy9mbGV4aWJsZS50YWJzLmNvbXBvbmVudCc7XHJcbmV4cG9ydCB7IEZsZXhpYmxlVGFic01vZHVsZSB9IGZyb20gJy4vc3JjL2FwcC9mbGV4aWJsZS10YWJzL2ZsZXhpYmxlLXRhYnMtbW9kdWxlJztcclxuIl19
