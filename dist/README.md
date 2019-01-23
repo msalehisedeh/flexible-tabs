@@ -5,26 +5,21 @@ Have you ever wanted to have a simple way of creating robust tabs in your compon
 
 **NOTE:** Starting with version 1.1.0 this library is compatible with Angular 6+.
 
+**NOTE:** Starting with version 1.2.1 you need to import this library through @sedeh/flexible-tabs.
+
 Please send your requests or comments through the link provided below:
 
 [Live Demo](https://flexible-tabs.stackblitz.io)  | [Source code](https://github.com/msalehisedeh/flexible-tabs/tree/master/src/app) | [Comments/Requests](https://github.com/msalehisedeh/flexible-tabs/issues)
 
 
-# Version 1.2.0
-It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing.
+## Features
 
-# Version 1.1.0
-Updated libraries to become compatible with Angular 6+. 
+* Responsive
+* ADA Compliant
+* Configurable tab position
+* Configurable tab display type
 
-
-# Version 1.0.2
-set defaults for some attributes. 
-
-# Version 1.0.0
-Compiled with AOT option and resolved issues. 
-
-# Version 0.0.1
-
+## Dependencies
 
 ```javascript
 MODULE:
@@ -34,12 +29,6 @@ EXPORTS:
   FlexibleTabComponent
   FlexibleTabsComponent
 ```
-
-## Features
-* Responsive
-* ADA Compliant
-* Configurable tab position
-* Configurable tab display type
 
 ## flexible-tabs Attributes
 
@@ -105,6 +94,18 @@ CSS Example:
     text-transform: capitalize;
 }
 ```
+
+## Revision History
+
+| Version | Description                                                                                              |
+|---------|----------------------------------------------------------------------------------------------------------|
+| 1.2.1   | Updated dependencies.                                                                                    |
+| 1.2.0   | It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing. |
+| 1.1.0   | Updated libraries to become compatible with Angular 6+.                                                  |
+| 1.0.2   | set defaults for some attributes.                                                                        |
+| 1.0.0   | Compiled with AOT option and resolved issues.                                                            |
+| 0.0.1   | Initial release.                                                                                         |
+
 
 ![alt text](https://raw.githubusercontent.com/msalehisedeh/flexible-tabs/master/sample.png  "What you would see when a flexible tabs is used")
 

@@ -1,6 +1,6 @@
 {
-  "name": "flexible-tabs",
-  "version": "1.2.0",
+  "name": "@sedeh/flexible-tabs",
+  "version": "1.2.1",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -11,9 +11,6 @@
   },
   "private": false,
   "keywords": [
-    "angular 2+",
-    "angular 4+",
-    "angular 5+",
     "angular 6+",
     "tabs",
     "dynamic tabs",
@@ -32,18 +29,18 @@
     "best"
   ],
   "dependencies": {
+  },
+  "devDependencies": {
     "@angular/common": "^6.0.0",
     "@angular/compiler": "^6.0.0",
     "@angular/core": "^6.0.0",
-    "core-js": "^2.5.4",
-    "font-awesome": "^4.7.0",
-    "zone.js": "^0.8.26"
-  },
-  "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.0",
     "@angular/cli": "^6.2.6",
     "@angular/compiler-cli": "^6.0.0",
     "@types/node": "^6.0.60",
+    "core-js": "^2.5.4",
+    "font-awesome": "^4.7.0",
+    "zone.js": "^0.8.26",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
     "codelyzer": "~4.5.0",
