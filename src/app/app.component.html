@@ -21,6 +21,7 @@
 </fieldset>
 
 <flexible-tabs [position]="myPosition" [type]="myType" message="click to select tab " (onchange)="ontabselection($event)">
+  <flexible-tab title="Dynamic" [component]="myComponent()" [data]="data"></flexible-tab>
   <flexible-tab *ngFor="let dummy of ' '.repeat(20).split(''), let x = index" title="tab {{x}}" tabicon="fa fa-bug" tabalticon="fa fa-coffee">
     <h3> information {{x}}</h3>
     This is a simple tab content that will be rendered immediately even if tab is not selected.  
@@ -30,6 +31,7 @@
 
 <ng-template #tab2 let-detail="data">
   <h3>Detail information about {{detail.name}}</h3>
+  <p>Latest data arrived at: {{data.time}}</p>
   This is a simple tab content that will be rendered only if tab is selected.
 </ng-template>
 

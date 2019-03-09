@@ -1,7 +1,7 @@
 
 # Welcome to Flexible tabs!
 
-Have you ever wanted to have a simple way of creating robust tabs in your components? Have you thought of what it takes to get there? With flexible tabs, you can configure position of tabs and how they should be displayed.  You can feed icons to the tabs and have a view area for displaying images.. You can have the view area to be rendered only if selected and watch for tab selection events to perform additional tasks.
+Have you ever wanted to have a simple way of creating robust tabs in your application? Have you thought of what it takes to get there? With flexible tabs, you can configure position of tabs and how they should be displayed.  You can feed icons to the tabs and have a view area for displaying images.. You can have the view area to be rendered only if selected and watch for tab selection events to perform additional tasks. And most of all, you can have contents of each tab dynamically loaded!!
 
 **NOTE:** Starting with version 1.1.0 this library is compatible with Angular 6+.
 
@@ -25,6 +25,13 @@ Please send your requests or comments through the link provided below:
 MODULE:
   FlexibleTabsModule
 
+INTERFACE:
+  DynamicTabContentComponent
+
+ENUM:
+  TabTypes
+  TabPositions
+
 EXPORTS:
   FlexibleTabComponent
   FlexibleTabsComponent
@@ -44,7 +51,8 @@ EXPORTS:
 | Attribute  | Options                         | Default | Description                                         |
 |------------|---------------------------------|---------|-----------------------------------------------------|
 | selected   | true/false                      | false   | By default the first tab will be selected.          |
-| template   | ng-template                     | none    | Template to be used at runtime to display content for selected tab. |
+| component  | a DynamicTabContentComponent    | none    | Implementation of DynamicTabContentComponent to be loaded at runtime for displaying content of a selected tab. |
+| template   | ng-template                     | none    | Template to be used at runtime for displaying content of selected tab. |
 | data       | JSON                            | none    | Data to be sent to the template for selected tab.   |
 | title      | any string                      | ""      | tab to be used by screen readername to be displayed.|
 | tabicon    | any string                      | null    | icon to be displayed on tab.                        |
@@ -58,6 +66,7 @@ You will need to set the tabs in your HTML content:
 In this example:
 1) first tab is static and Angular will render it immediately.
 2) second tab is template and angular will render it only if respective tab for it is selected.
+3) third tab is dynamically loaded component.
 
 <flexible-tabs 
   [position]="myPosition" 
@@ -70,6 +79,7 @@ In this example:
     This is a simple tab content that will be rendered immediately even if tab is not selected.  
   </flexible-tab>
   <flexible-tab title="tab 2" [template]="tab2" [data]="data" selected="true"></flexible-tab>
+  <flexible-tab title="tab 3" [component]="myComponentClassName()" [data]="data"></flexible-tab>
 </flexible-tabs>
 
 <ng-template #tab2 let-detail="data">
@@ -81,12 +91,43 @@ In this example:
 You will also need to implement a few functions
 
 ```javascript
+  import { TestComponent } from './my-test.component';
+  myComponentClassName() {
+    return TestComponent; // not an instance. returns actual component class.
+  }
   ontabselection(event) {
     // decide on what to do with the evet
   }
 ```
 
-If you want to overide any parts of default look, you can use ::ng-deep and do the following:
+If you are taking advantage of runtime dynamic component, you need to make sure it is declared in parent/root NgModule and it is included in entryComponents and declarations.
+
+```javascript
+@NgModule({
+  declarations: [AppComponent, TestComponent],
+  entryComponents: [TestComponent],
+  imports: [BrowserModule,HttpModule,FlexibleTabsModule],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+In addition your component should be implementation of DynamicTabContentComponent and should use **data** attribute to display its content. data given to this component will be the same data you pass to **flexible-tab** tag. `<flexible-tab title="tab 3" [component]="myComponentClassName()" [data]="data"></flexible-tab>`
+```javascript
+@Component({
+  selector: 'test',
+  template: `<h3>Dynamically loaded to display {{data.name}}</h3>`,
+  styles: [``]
+})
+export class TestComponent implements DynamicTabContentComponent {
+  data: any; // will use this to display content.
+
+  constructor() {
+    console.log("TestComponent is created!");
+  }
+}
+```
+
+If you want to override any parts of default look, you can use ::ng-deep and do the following:
 ```javascript
 CSS Example:
 
@@ -97,14 +138,18 @@ CSS Example:
 
 ## Revision History
 
-| Version | Description                                                                                              |
-|---------|----------------------------------------------------------------------------------------------------------|
-| 1.2.1   | Updated dependencies.                                                                                    |
+| Version | Description                                                                        |
+|---------|------------------------------------------------------------------------------------|
+| 1.3.1   | Forgot to export newly added interface.                                            |
+| 1.3.0   | Allowing tabs use dynamically loaded components to display contents.               |
+| 1.2.3   | Fixed the ExpressionChangedAfterItHasBeenCheckedError                              |
+| 1.2.2   | Fixed the ExpressionChangedAfterItHasBeenCheckedError                              |
+| 1.2.1   | Updated dependencies.                                                              |
 | 1.2.0   | It was brought to my attention that some users have trouble using my components in their angular 6 environment. Since I had only updated few dependencies when moved to Angular 6, I am thinking dependencies are causing issues. So, for this release, I am updating all dependencies to what Angular 6 applications are expecting to have. Please let me know if this is fixing or not fixing any issues you are facing. |
-| 1.1.0   | Updated libraries to become compatible with Angular 6+.                                                  |
-| 1.0.2   | set defaults for some attributes.                                                                        |
-| 1.0.0   | Compiled with AOT option and resolved issues.                                                            |
-| 0.0.1   | Initial release.                                                                                         |
+| 1.1.0   | Updated libraries to become compatible with Angular 6+.                            |
+| 1.0.2   | set defaults for some attributes.                                                  |
+| 1.0.0   | Compiled with AOT option and resolved issues.                                      |
+| 0.0.1   | Initial release.                                                                   |
 
 
 ![alt text](https://raw.githubusercontent.com/msalehisedeh/flexible-tabs/master/sample.png  "What you would see when a flexible tabs is used")

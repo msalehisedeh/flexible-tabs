@@ -47,7 +47,10 @@
             padding: 2px 15px;
             background-color: #fdfeff;
             color: #999;
-
+            -webkit-user-select: none;     
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
             &:hover {
                 background-color: #fff;
                 color: #ff3e58                

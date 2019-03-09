@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TestComponent } from './test.component';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
 
   data = {
     x: 1,
+    time: undefined,
     name: "Joe finderburger"
   }
   
@@ -20,7 +22,11 @@ export class AppComponent {
 
   }
 
+  myComponent() {
+    return TestComponent;
+  }
   ontabselection(event) {
+    this.data.time = Date.now();
     this.events.push(event);
   }
 }

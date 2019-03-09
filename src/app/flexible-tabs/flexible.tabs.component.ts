@@ -11,6 +11,12 @@ import {
 	ContentChildren,
 	QueryList,
 	AfterContentInit,
+	ChangeDetectorRef,
+	Injector,
+	ComponentFactoryResolver,
+	EmbeddedViewRef,
+	ElementRef,
+    ApplicationRef,
 	EventEmitter
 } from '@angular/core';
 
@@ -29,6 +35,10 @@ export enum TabPositions {
 	bottom = "bottom"
 }
 
+export interface DynamicTabContentComponent {
+	data: any;
+}
+
 @Component({
 	selector: 'flexible-tab',
 	templateUrl: './flexible.tab.component.html',
@@ -37,12 +47,16 @@ export enum TabPositions {
 export class FlexibleTabComponent {
 
 	hovered = false;
+	dynamicComponent: any;
 
     @Input("selected")
     public selected = false;
 
     @Input("title")
-    public title: string;
+	public title: string;
+	
+	@Input("component")
+	public component: any;
 
     @Input("tabalticon")
     public tabalticon: string;
@@ -56,10 +70,38 @@ export class FlexibleTabComponent {
     @Input("data")
     public sourceData: any;
 
-    constructor() {}
+    constructor(
+		private componentFactoryResolver: ComponentFactoryResolver,
+		private appRef: ApplicationRef,
+		private injector: Injector,
+		private host: ElementRef,
+		public detector: ChangeDetectorRef
+	) {}
 
 	templateContext() {
 		return {data: this.sourceData };
+	}
+	dynamicallyLoadedComponent() {
+		if (this.component) {
+			if (this.selected) {
+				this.initializeDynamicComponent();
+				const instance = (<DynamicTabContentComponent>this.dynamicComponent.instance);
+				this.host.nativeElement.append((this.dynamicComponent.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement);
+				instance.data = this.sourceData;
+			} else if (this.dynamicComponent) {
+				this.host.nativeElement.innerHTML = "";
+			}
+		}
+		return false;
+	}
+	private initializeDynamicComponent() {
+		if (!this.dynamicComponent) {
+			this.dynamicComponent = this.componentFactoryResolver
+				.resolveComponentFactory(this.component)
+				.create(this.injector);
+
+			this.appRef.attachView(this.dynamicComponent.hostView);
+		}
 	}
 }
 
@@ -115,20 +157,22 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 		}
 	}
 
-	keyup(event) {
+	keyup(event: any) {
         const code = event.which;
 		
 		if (code === 13) {
 			event.target.click();
 		}
 	}
-	selectTab(index) {
+	selectTab(index: number) {
 		this.tabs.map((tab)=>{
 			tab.selected = false;
 			tab.hovered = false;
+			tab.detector.detectChanges();
 		});
 		if (index > -1) {
 			this.tabs[index].selected = true;
+			this.tabs[index].detector.detectChanges();
 			this.selectedIndex = index;
 			this.popped = true;
 			this.onchange.emit({
@@ -137,13 +181,15 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 			});
 		}
 	}
-	hoverTab(index, flag) {
+	hoverTab(index: number, flag: boolean) {
 		if (this.pophover) {
 			this.tabs.map((tab)=>{
 				tab.hovered = false;
+				tab.detector.detectChanges();
 			});
 			if (index > -1){
 				this.tabs[index].hovered = flag;
+				this.tabs[index].detector.detectChanges();
 			}
 			this.popped = this.selectedIndex > -1 || flag;
 		}

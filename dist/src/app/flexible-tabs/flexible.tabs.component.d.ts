@@ -1,4 +1,4 @@
-import { QueryList, AfterContentInit } from '@angular/core';
+import { QueryList, AfterContentInit, ChangeDetectorRef, Injector, ComponentFactoryResolver, ElementRef, ApplicationRef } from '@angular/core';
 export declare enum TabTypes {
     button = "button",
     tab = "tab",
@@ -12,18 +12,30 @@ export declare enum TabPositions {
     right = "right",
     bottom = "bottom",
 }
+export interface DynamicTabContentComponent {
+    data: any;
+}
 export declare class FlexibleTabComponent {
+    private componentFactoryResolver;
+    private appRef;
+    private injector;
+    private host;
+    detector: ChangeDetectorRef;
     hovered: boolean;
+    dynamicComponent: any;
     selected: boolean;
     title: string;
+    component: any;
     tabalticon: string;
     tabicon: string;
     template: any;
     sourceData: any;
-    constructor();
+    constructor(componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, injector: Injector, host: ElementRef, detector: ChangeDetectorRef);
     templateContext(): {
         data: any;
     };
+    dynamicallyLoadedComponent(): boolean;
+    private initializeDynamicComponent();
 }
 export declare class FlexibleTabsComponent implements AfterContentInit {
     tabs: any[];
@@ -39,6 +51,6 @@ export declare class FlexibleTabsComponent implements AfterContentInit {
     constructor();
     ngAfterContentInit(): void;
     keyup(event: any): void;
-    selectTab(index: any): void;
-    hoverTab(index: any, flag: any): void;
+    selectTab(index: number): void;
+    hoverTab(index: number, flag: boolean): void;
 }
