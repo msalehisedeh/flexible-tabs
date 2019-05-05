@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TestComponent } from './test.component';
+import { TestComponent, TestComponent2 } from './test.component';
 
 @Component({
   selector: 'app-root',
@@ -25,8 +25,19 @@ export class AppComponent {
   myComponent() {
     return TestComponent;
   }
-  ontabselection(event) {
+  myComponent2() {
+    return TestComponent2;
+  }
+  ontabselection(event: any) {
     this.data.time = Date.now();
+    if (event.selectedTitle === 'Dynamic') {
+      if (this.data['position']) 
+        delete this.data['position'];
+    } else {
+      this.data['position'] = {
+        location: this.myPosition
+      };
+    }
     this.events.push(event);
   }
 }

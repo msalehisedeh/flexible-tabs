@@ -1,12 +1,4 @@
 
-.logger {
-    box-sizing: border-box;
-    display: inline-block;
-    max-height: 222px;
-    overflow-y: auto;
-    margin-bottom: 45px;
-    width: 100%;
-}
 h3 {
     margin: 0 0 20px 0;
 }
@@ -20,6 +12,16 @@ fieldset {
 .log-field {
     width: 100%;
     margin-top:20px;
+    margin-bottom: 0;
+    padding: 0;
+    .logger {
+        box-sizing: border-box;
+        display: inline-block;
+        max-height: 222px;
+        overflow-y: auto;
+        margin: 0;
+        width: 100%;
+    }
 }
 ::ng-deep .tab-title {
     text-transform: capitalize;

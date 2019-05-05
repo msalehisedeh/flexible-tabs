@@ -1,8 +1,6 @@
-    
 <ng-container  
-    *ngIf="((!hovered && selected) || hovered) && template"
+    *ngIf="((!hovered && selected) || hovered) && template && !component"
     [ngTemplateOutlet]="template" 
     [ngTemplateOutletContext]="templateContext()"></ng-container>
 
 <ng-content *ngIf="((!hovered && selected) || hovered) && !template && !component"></ng-content>
-<div *ngIf="dynamicallyLoadedComponent()"></div>

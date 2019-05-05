@@ -18,8 +18,9 @@
     }
     .tabs-viewport {
         box-sizing: border-box;
-        padding: 10px;
         min-height: 150px;
+        display: flex;
+        align-items: stretch;
         &.popper {
             opacity: 0;
             pointer-events: none;
@@ -40,6 +41,7 @@
     .tabs-control {
         z-index: 2;
         flex-wrap: wrap-reverse;
+        min-width: 27px;
         display: flex;
         a {
             box-sizing: border-box;
@@ -55,11 +57,15 @@
                 background-color: #fff;
                 color: #ff3e58                
             }
-
             &.selected {
                 background-color: #fff;
                 color: #000;
                 font-weight: bold;
+            }
+            &.icon {
+                :before {
+                    display: block;
+                }
             }
         }
     }
@@ -102,7 +108,7 @@
             .tabs-control {
                 a {
                     border: 1px solid #888;
-                    margin: 0 2px;
+                    margin: 2px;
                     border-radius: 4px;
                     background-color: #f0f0f0cc;
     
@@ -183,7 +189,7 @@
                 flex-wrap: wrap;
                 a {
                     border: 1px solid #888;
-                    margin: 0 2px;
+                    margin: 2px;
                     border-radius: 4px;
                     background-color: #f0f0f0cc;
     
@@ -239,7 +245,7 @@
                 }
             }
             .tabs-viewport {
-                flex: 0 0 10%;
+                flex: 1;
                 margin: 5px 0;
             }
         }

@@ -20,13 +20,19 @@
   <label for="radio-selection"><input id="radio-selection" name="myType" type="radio" [checked]="myType === 'radio'" (click)="myType = 'radio'" />Radio</label>
 </fieldset>
 
-<flexible-tabs [position]="myPosition" [type]="myType" message="click to select tab " (onchange)="ontabselection($event)">
+<flexible-tabs 
+  [position]="myPosition" 
+  [collapsed]="false"
+  [type]="myType" 
+  message="click to select tab " 
+  (onchange)="ontabselection($event)">
   <flexible-tab title="Dynamic" [component]="myComponent()" [data]="data"></flexible-tab>
+  <flexible-tab title="Dynamic2" [component]="myComponent2()" [data]="data"></flexible-tab>
   <flexible-tab *ngFor="let dummy of ' '.repeat(20).split(''), let x = index" title="tab {{x}}" tabicon="fa fa-bug" tabalticon="fa fa-coffee">
     <h3> information {{x}}</h3>
     This is a simple tab content that will be rendered immediately even if tab is not selected.  
   </flexible-tab>
-  <flexible-tab title="tab 2" [template]="tab2" [data]="data" selected="true"></flexible-tab>
+  <flexible-tab title="tab x" [template]="tab2" [data]="data" selected="true"></flexible-tab>
 </flexible-tabs>
 
 <ng-template #tab2 let-detail="data">

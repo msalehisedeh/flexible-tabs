@@ -1,4 +1,4 @@
-import { QueryList, AfterContentInit, ChangeDetectorRef, Injector, ComponentFactoryResolver, ElementRef, ApplicationRef } from '@angular/core';
+import { QueryList, AfterContentInit, ChangeDetectorRef, Injector, ComponentFactoryResolver, ElementRef, ApplicationRef, Renderer2, OnInit } from '@angular/core';
 export declare enum TabTypes {
     button = "button",
     tab = "tab",
@@ -13,15 +13,19 @@ export declare enum TabPositions {
     bottom = "bottom",
 }
 export interface DynamicTabContentComponent {
-    data: any;
+    activate(data: any, template?: any, helper?: any): void;
+    deactivate(): void;
 }
-export declare class FlexibleTabComponent {
+export declare class FlexibleTabComponent implements OnInit {
     private componentFactoryResolver;
+    private host;
     private appRef;
     private injector;
-    private host;
-    detector: ChangeDetectorRef;
+    private renderer;
+    private detector;
     hovered: boolean;
+    index: number;
+    flexibleId: string;
     dynamicComponent: any;
     selected: boolean;
     title: string;
@@ -30,11 +34,15 @@ export declare class FlexibleTabComponent {
     tabicon: string;
     template: any;
     sourceData: any;
-    constructor(componentFactoryResolver: ComponentFactoryResolver, appRef: ApplicationRef, injector: Injector, host: ElementRef, detector: ChangeDetectorRef);
+    handler: any;
+    constructor(componentFactoryResolver: ComponentFactoryResolver, host: ElementRef, appRef: ApplicationRef, injector: Injector, renderer: Renderer2, detector: ChangeDetectorRef);
+    ngOnInit(): void;
     templateContext(): {
         data: any;
     };
-    dynamicallyLoadedComponent(): boolean;
+    deactivate(deselect: boolean): void;
+    activate(): void;
+    hover(flag: boolean): void;
     private initializeDynamicComponent();
 }
 export declare class FlexibleTabsComponent implements AfterContentInit {
@@ -47,10 +55,12 @@ export declare class FlexibleTabsComponent implements AfterContentInit {
     type: TabTypes;
     pophover: boolean;
     message: string;
+    flexibleId: string;
+    collapsed: boolean;
     private onchange;
     constructor();
     ngAfterContentInit(): void;
-    keyup(event: any): void;
+    keyup(event: any, index: number): boolean;
     selectTab(index: number): void;
     hoverTab(index: number, flag: boolean): void;
 }

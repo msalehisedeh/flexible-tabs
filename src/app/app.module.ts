@@ -2,17 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 
-import {TestComponent } from './test.component';
+import { TestComponent, TestComponent2 } from './test.component';
 import { AppComponent } from './app.component';
 import { FlexibleTabsModule } from './flexible-tabs/flexible-tabs-module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestComponent
+    TestComponent,
+    TestComponent2
   ],
   entryComponents: [
-    TestComponent
+    TestComponent,
+    TestComponent2
   ],
   imports: [
     BrowserModule,

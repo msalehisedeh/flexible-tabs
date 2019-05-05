@@ -17,7 +17,9 @@ import {
 	EmbeddedViewRef,
 	ElementRef,
     ApplicationRef,
-	EventEmitter
+	EventEmitter,
+	Renderer2,
+	OnInit
 } from '@angular/core';
 
 export enum TabTypes {
@@ -36,7 +38,20 @@ export enum TabPositions {
 }
 
 export interface DynamicTabContentComponent {
-	data: any;
+  /*
+   * Will activate the component with given data.
+   * @attribute data: initial data.
+   * @arreibute template: if this component needs to have sub-template
+   * @attribute helper: if component needs a helper.
+   */
+  activate(data: any, template?: any, helper?: any): void;
+
+  /*
+   * Will tell component to pause all activities and freez data till activation.
+   * recommendation is for the component to eigther undefine data and handle it or use
+   * JSON.parse(JSON.stringyfy(data)) to freez it and break away from pointer it has received in activation
+   */
+  deactivate(): void;
 }
 
 @Component({
@@ -44,9 +59,11 @@ export interface DynamicTabContentComponent {
 	templateUrl: './flexible.tab.component.html',
 	styleUrls: ['./flexible.tab.component.scss']
 })
-export class FlexibleTabComponent {
+export class FlexibleTabComponent implements OnInit {
 
 	hovered = false;
+	index: number;
+	flexibleId: string;
 	dynamicComponent: any;
 
     @Input("selected")
@@ -68,31 +85,64 @@ export class FlexibleTabComponent {
     public template: any;
 
     @Input("data")
-    public sourceData: any;
+	public sourceData: any;
+	
+	@Input("handler")
+	public handler: any;
 
     constructor(
 		private componentFactoryResolver: ComponentFactoryResolver,
+		private host: ElementRef,
 		private appRef: ApplicationRef,
 		private injector: Injector,
-		private host: ElementRef,
-		public detector: ChangeDetectorRef
-	) {}
+		private renderer: Renderer2,
+		private detector: ChangeDetectorRef
+	) {
+	}
+
+	ngOnInit() {
+		this.renderer.setAttribute(this.host.nativeElement, 'id', this.flexibleId + '-panel-' + this.index);
+		this.renderer.setAttribute(this.host.nativeElement, 'aria-labelledby', this.flexibleId + '-tab-' + this.index);
+		this.renderer.setAttribute(this.host.nativeElement, 'role', "tabpanel");
+		this.renderer.setAttribute(this.host.nativeElement, 'aria-labeledby', this.flexibleId + '-tab-' +  this.index);
+		this.renderer.setAttribute(this.host.nativeElement, 'aria-hidden', this.selected ? 'false':'true');
+		this.host.nativeElement.style.display="selected ? 'block':'none'" 
+	}
 
 	templateContext() {
 		return {data: this.sourceData };
 	}
-	dynamicallyLoadedComponent() {
-		if (this.component) {
-			if (this.selected) {
-				this.initializeDynamicComponent();
-				const instance = (<DynamicTabContentComponent>this.dynamicComponent.instance);
-				this.host.nativeElement.append((this.dynamicComponent.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement);
-				instance.data = this.sourceData;
-			} else if (this.dynamicComponent) {
-				this.host.nativeElement.innerHTML = "";
+	deactivate(deselect: boolean): void {
+		if (deselect) {
+			this.renderer.setAttribute(this.host.nativeElement, 'tabIndex', '-1');
+			this.renderer.setStyle(this.host.nativeElement, 'display', 'none');
+			if(this.selected) {
+				this.selected = false;
+				if (this.dynamicComponent) {
+					const instance = (<DynamicTabContentComponent>this.dynamicComponent.instance);
+					instance.deactivate();
+				}
 			}
 		}
-		return false;
+		this.hovered = false;
+		this.detector.detectChanges();
+	}
+	activate(): void {
+		if (!this.selected) {
+			this.selected = true;
+			this.detector.detectChanges();
+			this.renderer.setAttribute(this.host.nativeElement, 'tabIndex', '0');
+			this.renderer.setStyle(this.host.nativeElement, 'display', 'block');
+			if (this.component) {
+				this.initializeDynamicComponent();
+				const instance = (<DynamicTabContentComponent>this.dynamicComponent.instance);
+				instance.activate(this.sourceData, this.template, this.handler);
+			}
+		}
+	}
+	hover(flag: boolean): void {
+		this.hovered = flag;
+		this.detector.detectChanges();
 	}
 	private initializeDynamicComponent() {
 		if (!this.dynamicComponent) {
@@ -101,6 +151,7 @@ export class FlexibleTabComponent {
 				.create(this.injector);
 
 			this.appRef.attachView(this.dynamicComponent.hostView);
+			this.host.nativeElement.appendChild((this.dynamicComponent.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement);
 		}
 	}
 }
@@ -130,21 +181,29 @@ export class FlexibleTabsComponent implements AfterContentInit  {
     public pophover = false;
 
     @Input("message")
-    public message = "click to select tab ";
+    public message = "Click to select tab. Use arrow keys to navigate to other tabs.";
 
+	@Input("flexibleId")
+	public flexibleId = '';
+
+	@Input("collapsed")
+	public collapsed = false;
+	
 	@Output('onchange')
 	private onchange = new EventEmitter();
 
     constructor() {}
 
 	ngAfterContentInit() {
+		let defaultIndex =  this.pophover ? -1 : 0;
 		this.tabs = [];
-		this.selectedIndex = this.pophover ? -1 : 0;
 		this.isIconified = false;
 
 		this.children.forEach((tabInstance, index) => {
+			tabInstance.index = index;
+			tabInstance.flexibleId = this.flexibleId;
 			if(tabInstance.selected) {
-				this.selectedIndex = index;
+				defaultIndex = index;
 			}
 				this.isIconified = true;
 			if (tabInstance.tabicon || tabInstance.tabalticon) {
@@ -153,43 +212,57 @@ export class FlexibleTabsComponent implements AfterContentInit  {
 			this.tabs.push(tabInstance);
 		});
 		if (this.tabs.length) {
-			this.selectTab( this.selectedIndex );
+			this.selectTab( defaultIndex );
+		} else {
+			this.selectedIndex = defaultIndex;
 		}
 	}
 
-	keyup(event: any) {
-        const code = event.which;
+	keyup(event: any, index: number) {
+		const code = event.which;
+		let id = undefined;
 		
 		if (code === 13) {
 			event.target.click();
+		} else if (code === 37 && (this.position === 'top' || this.position === 'bottom')) { // left arrow
+			id = document.getElementById(this.flexibleId + '-tab-' + (index - 1));
+		} else if (code === 39 && (this.position === 'top' || this.position === 'bottom')) {// rght arrow
+			id = document.getElementById(this.flexibleId + '-tab-' + (index + 1));
+		} else if (code === 38 && (this.position === 'left' || this.position === 'right')) { // up arrow
+			id = document.getElementById(this.flexibleId + '-tab-' + (index + 1));
+		} else if (code === 40 && (this.position === 'left' || this.position === 'right')) {// down arrow
+			id = document.getElementById(this.flexibleId + '-tab-' + (index - 1));
+		}
+		if (id) {
+			event.preventDefault();
+			event.stopPropagation();
+			id.focus();
+			return false;
 		}
 	}
 	selectTab(index: number) {
-		this.tabs.map((tab)=>{
-			tab.selected = false;
-			tab.hovered = false;
-			tab.detector.detectChanges();
-		});
-		if (index > -1) {
-			this.tabs[index].selected = true;
-			this.tabs[index].detector.detectChanges();
-			this.selectedIndex = index;
-			this.popped = true;
-			this.onchange.emit({
-				selectedIndex: index,
-				selectedTitle: this.tabs[index].title
+		if (this.selectedIndex != index) {
+			this.tabs.map((tab)=>{
+				tab.deactivate(true);
 			});
+			if (index > -1) {
+				this.tabs[index].activate();
+				this.selectedIndex = index;
+				this.popped = true;
+				this.onchange.emit({
+					selectedIndex: index,
+					selectedTitle: this.tabs[index].title
+				});
+			}
 		}
 	}
 	hoverTab(index: number, flag: boolean) {
 		if (this.pophover) {
 			this.tabs.map((tab)=>{
-				tab.hovered = false;
-				tab.detector.detectChanges();
+				tab.deactivate(false);
 			});
 			if (index > -1){
-				this.tabs[index].hovered = flag;
-				this.tabs[index].detector.detectChanges();
+				this.tabs[index].hover(flag);
 			}
 			this.popped = this.selectedIndex > -1 || flag;
 		}
