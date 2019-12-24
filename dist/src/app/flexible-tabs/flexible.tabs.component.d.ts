@@ -4,13 +4,13 @@ export declare enum TabTypes {
     tab = "tab",
     plain = "plain",
     icon = "icon",
-    radio = "radio",
+    radio = "radio"
 }
 export declare enum TabPositions {
     top = "top",
     left = "left",
     right = "right",
-    bottom = "bottom",
+    bottom = "bottom"
 }
 export interface DynamicTabContentComponent {
     activate(data: any, template?: any, helper?: any): void;
@@ -43,7 +43,7 @@ export declare class FlexibleTabComponent implements OnInit {
     deactivate(deselect: boolean): void;
     activate(): void;
     hover(flag: boolean): void;
-    private initializeDynamicComponent();
+    private initializeDynamicComponent;
 }
 export declare class FlexibleTabsComponent implements AfterContentInit {
     tabs: any[];

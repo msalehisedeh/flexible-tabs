@@ -152,6 +152,7 @@ CSS Example:
 
 | Version | Description                                                                        |
 |---------|------------------------------------------------------------------------------------|
+| 2.0.0   | Upgraded to Angular 8.                                                             |
 | 1.3.7   | Dependencies updated.                                                              |
 | 1.3.6   | IE11 still had some issues. Made few adjustments to improve performance.           |
 | 1.3.5   | Fixed issue with dynamic component loading and IE issue. Updated tab indexing to allow a key press on tab key push the focus inside selected tab area. to select other tabs, a right/left or up/down arrow key would do the trick. |
