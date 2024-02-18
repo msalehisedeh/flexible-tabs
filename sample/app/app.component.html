@@ -1,0 +1,49 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+</div>
+<fieldset>
+  <legend>Position</legend>
+  <label for="top-selection"><input id="top-selection" name="myPosition" type="radio" [checked]="isSelectedPosition('top')" (click)="changePosition('top')" />Top</label>
+  <label for="bottom-selection"><input id="bottom-selection" name="myPosition" type="radio" [checked]="isSelectedPosition('bottom')" (click)="changePosition('bottom')" />Bottom</label>
+  <label for="left-selection"><input id="left-selection" name="myPosition" type="radio" [checked]="isSelectedPosition('left')" (click)="changePosition('left')" />Left</label>
+  <label for="right-selection"><input id="right-selection" name="myPosition" type="radio" [checked]="isSelectedPosition('right')" (click)="changePosition('right')" />Right</label>
+</fieldset>
+<fieldset>
+  <legend>Type</legend>
+  <label for="tab-selection"><input id="tab-selection" name="myType" type="radio" [checked]="isSelectedType('tab')" (click)="changeType('tab')" />Tab</label>
+  <label for="button-selection"><input id="button-selection" name="myType" type="radio" [checked]="isSelectedType('button')" (click)="changeType('button')" />Button</label>
+  <label for="plain-selection"><input id="plain-selection" name="myType" type="radio" [checked]="isSelectedType('plain')" (click)="changeType('plain')" />Plain</label>
+  <label for="icon-selection"><input id="icon-selection" name="myType" type="radio" [checked]="isSelectedType('icon')" (click)="changeType('icon')" />Icon Only</label>
+  <label for="radio-selection"><input id="radio-selection" name="myType" type="radio" [checked]="isSelectedType('radio')" (click)="changeType('radio')" />Radio</label>
+</fieldset>
+
+<flexible-tabs 
+  [position]="myPosition" 
+  [collapsed]="false"
+  [type]="myType" 
+  message="click to select tab " 
+  (onchange)="ontabselection($event)">
+  <flexible-tab title="Dynamic" [component]="myComponent()" [data]="data"></flexible-tab>
+  <flexible-tab title="Dynamic2" [component]="myComponent2()" [data]="data"></flexible-tab>
+  <flexible-tab *ngFor="let dummy of ' '.repeat(20).split(''), let x = index" title="tab {{x}}" tabicon="fa fa-bug" tabalticon="fa fa-coffee">
+    <h3> information {{x}}</h3>
+    This is a simple tab content that will be rendered immediately even if tab is not selected.  
+  </flexible-tab>
+  <flexible-tab title="tab x" [template]="tab2" [data]="data" [selected]="true"></flexible-tab>
+</flexible-tabs>
+
+<ng-template #tab2 let-detail="data">
+  <h3>Detail information about {{detail.name}}</h3>
+  <p>Latest data arrived at: {{data.time}}</p>
+  This is a simple tab content that will be rendered only if tab is selected.
+</ng-template>
+
+<fieldset class="log-field">
+  <legend>Event Logs</legend>
+  <ul class="logger">
+  <li *ngFor="let x of events" [textContent]="x | json"></li>
+</ul>
+</fieldset>
